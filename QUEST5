@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  name: adhocdepaninditaq5
+  labels:
+    adhoc: aninditaq5
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - image: anindita06/webapp:v1
+        command: ["/bin/sh","-c","ping 8.8.8.8"]
+        ports:
+        - containerPort: 80
+        
+        
+  kubectl create -f q5dep1.yaml
+  kubectl expose deployment adhocaninditadep1 --type LoadBalancer q5svcanindita --port 80
+  kubectl get svc
+  kubectl get po
+  
