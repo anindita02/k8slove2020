@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+ name: adhocpod2
+ labels:
+  name: aninditaq3
+  adhoc: aninditaq3
+spec:
+  containers:
+   - name: adhocpod2
+     image: anindita06/webapp:v1
+     command: ["/bin/sh","-c","app2']
+     ports:
+      - containerPort: 80                                                                                                                                                                                                                                                                                                                               apiVersion: v1
+kind: Service
+metadata:
+ creationTimestamp: null
+ labels:
+  app: q3svcanindita
+  name: q3svcanindita
+spec:
+ ports:
+  - name: myport
+    port: 80
+    protocol: TCP
+    targetPort: 80
+ selector:
+  run: aninditaq3                                                                                                                                                             type: NodePort
+status: {}
