@@ -1,0 +1,39 @@
+apiVersion:v1
+kind:Pod
+metadata:
+ creationTimestamp: null
+ labels: #label of pod
+   run: aninditaq2
+  adhoc: aninditaq2 #name of pod
+spec:
+  containers:
+  - image:nginx
+    name: anip1
+    ports:
+    - containerPort: 80
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: status: {}
+ ---
+ apiVersion: v1
+ kind: Service
+ metadata:
+  creationTimestamp: null
+  labels:
+    app: q2svcanindita
+   name: q2svcanindita
+ spec:
+   ports:
+   - name: myport
+     port: 80
+     protocol: TCP
+     targetPort: 80
+   selector:
+     run: anip1
+   type: NodePort
+status: {}
+
+kubectl create -f q2.yaml
+kubectl get po
+kubectl get nodes
+kubectl get svc
