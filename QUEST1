@@ -1,0 +1,52 @@
+#Multi app docker file
+ vim adhochttpd.dockerfile
+   17  ls
+   18  cd.
+   19  cd ~
+   20  vim adhochttpd.dockerfile
+   21  ls
+   22  mkdir webapp2
+   23  ls
+   24  vim adhochttpd.dockerfile
+   25  vim start.sh
+   26  docker login
+   27  docker build -t webapp:v1 -f adhochttpd.dockerfile .
+   28  vim adhochttpd.dockerfile
+   29  docker build -t webapp:v1 -f adhochttpd.dockerfile .
+   30  docker login
+   31  docker tag webapp:v1  anindita/webapp:v1
+   32  docker tag webapp:v1  anindita06/webapp:v1
+   33  docker push anindita06/webapp:v1
+   
+#DOCKERFILE
+FROM centos
+MAINTAINER aninditamishra6@gmail.com
+RUN yum install httpd -y
+RUN mkdir mycode
+ADD https://github.com/mdn/beginner-html-site-styled /mycode/app1
+ADD https://github.com/microsoft/project-html-website /mycode/app2
+COPY start.sh /mycode/start.sh
+RUN chmod +x /mycode/start.sh
+EXPOSE 80
+ENV x=app
+ENTRYPOINT  ["/bin/bash","/mycode/start.sh"]
+
+
+#script
+#!/bin/bash
+
+if  ["$x" == app1]
+
+then
+        cp -rf /mycode/app1/* /var/www/html
+        httpd -DFOREGROUND
+
+elif ["$x" == app2]
+then
+         cp -rf /mycode/app2/* /var/www/html
+         httpd -DFOREGROUND
+else
+        echo "Match not found" >/var/www/html/index.html
+        httpd -DFOREGROUND
+
+fi
