@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+ name: adhocaninditaq4
+ labels:
+  adhoc: aninditaq4
+
+spec:
+ selector:
+  adhoc: aninditaq4
+replicas: 1
+template:
+ metadata:
+  name: mypodrs
+  labels:
+   adhoc: aninditaq4
+ spec:
+  containers:
+  - name: anindita
+    image: anindita06/webapp:v1
+    ports:
+     - containerPort: 80
+     
+ kubectl apply -f q4rs.yaml
+ kubectl get rs
+ kubectl expose rs adhocaninditaq4 --type LoadBalancer q4svcanindita --port 80
+ kubectl get svc
+ kubectl get po -o wide
